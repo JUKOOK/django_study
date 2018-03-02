@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^blog/', include('blog.urls')),
     url(r'^apisample/', include('restAPI.urls', namespace='restAPI')),
+    url(r'^community/', include('community.urls')),
 ]

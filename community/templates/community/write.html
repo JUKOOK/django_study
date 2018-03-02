@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Community : Write</title>
+</head>
+<body>
+    <h3>forms.py와 views.py 로 제작한 form</h3>
+    <form action="" method="post"> <!-- if request.method == 'POST' => true -->
+        <!-- {{ form.as_table }} : 테이블 형태 form -->
+        <!-- {{ form.as_p }} : p 형태 form -->
+        <!-- {{ form.as_ul }} : ul 형태 form -->
+        {{ form.as_ul }}
+        {% csrf_token %} <!-- 기본적인 form 에서 다양한 공격 issue 발생하는데, 이를 방어하는 코드, 필수임 -->
+        <button type="submit" class="btn btn-primary">저장</button>
+    </form>
+</body>
+</html>

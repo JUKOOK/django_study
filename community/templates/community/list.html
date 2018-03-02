@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Community : List</title>
+</head>
+<body>
+    <ul>
+    {% for article_elem in articleList %}
+        <!--<li>  <a href="/community/go/{{ article_elem.id }}">{{ article_elem.title}}</a> | <b>{{ article_elem.name}}</b> | <i>{{ article_elem.created_at|date:"D d M Y" }}</i>-->
+            <!--| <h6>{{ article_elem.email}}</h6>-->
+        <!--</li>-->
+        <li>  <a href="{% url 'community.views.goToview' num=article_elem.id %}">{{ article_elem.title}}</a> | <b>{{ article_elem.name}}</b> | <i>{{ article_elem.created_at|date:"D d M Y" }}</i>
+            | <h6>{{ article_elem.email}}</h6>
+        </li> <!-- urls.py 찾는 행위 없이 views 함수에 직접 연결 -->
+    {% endfor %}
+    </ul>
+</body>
+</html>

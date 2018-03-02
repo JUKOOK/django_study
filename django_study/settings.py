@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'blog',
     'restAPI',
+    'community',
 ]
 
 MIDDLEWARE_CLASSES = [

@@ -13,6 +13,15 @@ def lnglat_validator(value):
 # Create your models here.
 # DB 만들기 장고 ORM 이용... DB Post와 그 내부 column 정의
 class Post(models.Model):
+    # STATUS_CHOICES에 대해 미리 정의한다. char 1짜리로 연결된다.
+    # admin.py에서 actions 구현을 통해 status field를 Bulk Update 가능케할 수 있다.
+    STATUS_CHOICES = (
+        ('d', 'Draft'),
+        ('p', 'Published'),
+        ('w', 'Withdrawn'),
+        ('a', 'Another_ex'),
+    )
+
     # 필수 필드 : null, empty 불가(둘 다 False). 상태 따로 지정하지 않으면 기본적으로 default인 False 적용
     # 그냥 makemigration을 하면 default 값에 대한 질문을 해오므로, default 인자를 설정해주자.
     author = models.CharField(max_length=20, default='anonymous')
@@ -34,3 +43,5 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)        # 저장될 때마다 일시 자동저장
     testfield = models.IntegerField(default=10)
     testtime = models.DateTimeField(default=timezone.now)
+    # 추가 field :
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES)

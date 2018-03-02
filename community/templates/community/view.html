@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Community : GoToView</title>
+</head>
+<body>
+    <h1> 제목 : {{ article.title }} <span style="font-size: 12px; font-weight: lighter"> {{ article.created_at|date:"Y M d D" }} </span> </h1>
+    <br/>
+    <h3> 저자 : {{ article.name }} </h3>
+    <br/>
+    <b> 내용 : {{ article.contents }} </b>
+    <br/>
+    <br/>
+    <span> Email : {{ article.email }} </span>
+</body>
+</html>
