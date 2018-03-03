@@ -20,7 +20,7 @@ def write(request):
 
 
 def list(request):
-    # form으로 받은 user data를 리스트로 표시해준다.
+    # form으로 받은 user data -> Article : 리스트로 표시해준다.
     articleList = Article.objects.all()
 
     # 연결 html 내에 articleList 이라는 template tag를 정의하고 연결한다.

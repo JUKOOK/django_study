@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>BookMark : Detail </title>
+</head>
+<body>
+    <div id="content">
+        <!-- views.generic 기반한 클래스 기반 뷰이므로 콘텍스트 변수 object를 쓴다. -->
+        <h2> {{ object.title }} </h2>
+        <ul>
+            <li>URL : <a href="{{ object.url }}" target="_blank"> {{ object.url }}</a> -> GOGO </li>
+        </ul>
+    </div>
+</body>
+</html>

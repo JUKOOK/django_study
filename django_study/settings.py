@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'blog',
     'restAPI',
     'community',
+    'bookmark.apps.BookmarkConfig',
 ]
 
 MIDDLEWARE_CLASSES = [

@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^blog/', include('blog.urls')),
     url(r'^apisample/', include('restAPI.urls', namespace='restAPI')),
     url(r'^community/', include('community.urls')),
+    url(r'^bookmark/', include('bookmark.urls')),
 ]
