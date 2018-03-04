@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title> POST : DETAIL</title>
+    <style>
+        .body {
+            width: 70%;
+        }
+
+        h1 {
+            color: #c81414;
+        }
+        button a {
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+
+<h1> {{ object.title }} </h1>
+
+<p class="other_post">
+    {% if object.get_previous_by_modify_date %}  <!-- modify_date 기준 이전 객체가 있다면 -->
+    &laquo;--
+    <a href="{{ object.get_previous_post.get_absolute_url }}" title="View Previous post">
+        {{ object.get_previous_post }}</a>  <!-- 이전 객체의 문자열 텍스트 = __str__에 따라 title로 변환 -->
+    {% endif %}
+    ||
+    {% if object.get_next_by_modify_date %}  <!-- modify_date 기준 다음 객체가 있다면 -->
+    <a href="{{ object.get_next_post.get_absolute_url }}" title="View Next post">
+        {{ object.get_next_post }} </a> --&raquo; <!-- 다음 객체의 문자열 텍스트 = __str__에 따라 title로 변환 -->
+    {% endif %}
+</p>
+
+
+<h5 class="date"> {{ object.author}} || {{ object.modify_date|date:"F j일, Y" }} </h5>
+
+<br/><br/>
+
+<div class="body">
+    <p><b>{{ object.content|linebreaks }}</b></p>
+</div>
+
+<button><a href="{% url 'blog:post_list' %}"> 기본 목록 돌아가기 </a></button>
+<button><a href="{% url 'blog:post_archive' %}"> 전체 목록 보관소 </a></button>
+<button><a href="{% url 'blog:post_year_archive' object.modify_date|date:'Y' %}"> 포스트와 동일한 연도 글 목록 </a></button>
+<button><a href="{% url 'blog:post_month_archive' object.modify_date|date:'Y' %}"> 포스트와 동일한 월 글 목록  </a></button>
+<button><a href="{% url 'blog:post_day_archive' object.modify_date|date:'Y' object.modify_date|date:'d' %}"> 포스트와 동일한 월일 글 목록  </a></button>
+</body>
+</html>

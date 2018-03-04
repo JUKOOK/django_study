@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title> POST : ALL</title>
+    <style>
+        h3 {
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Post List</h1>
+
+{% for post in posts %} <!-- object_list 대신 posts 가능-->
+    <h3><a href="{{ post.get_absolute_url }}" target="_blank"> {{ post.title }}</a></h3>
+    <small> {{ post.modify_date|date:"N d, Y" }}</small> <!-- 포맷 기능 -->
+    <p> {{ post.description }} : 연결 url slug -> <b>{{ post.slug }}</b></p>
+
+{% endfor %}
+<br/><br/>
+<div>
+    <span> <!-- span 태그 요소들은 한줄 배치된다. paging 기능을 위한 공간 -->
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">PreviousPage</a>
+        {% endif %}
+
+        || Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} ||
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">NextPage</a>
+        {% endif %}
+    </span>
+</div>
+
+</body>
+</html>

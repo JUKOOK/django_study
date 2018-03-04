@@ -11,7 +11,7 @@
             <!-- views.generic 기반한 클래스 기반 뷰이므로 콘텍스트 변수 object_list를 쓴다. -->
             <!-- { bookmark } 요거 객체의 __str__ 호출한다. 따라서 'title' 값을 반환한다. -->
             {% for bookmark in object_list %}
-                <li><a href="{% url 'bookmark_detail_view' bookmark.id %}"> {{ bookmark }}</a>.</li>
+                <li><a href="{% url 'bookmark:detail_view' bookmark.id %}"> {{ bookmark }}</a>.</li>
             {% endfor %}
         </ul>
     </div>

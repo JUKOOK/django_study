@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title> POST : Archive</title>
+    <style>
+        .main ul li {
+            width: 40%;
+            position: relative;
+        }
+        .main ul li span{
+            width: 70px;
+            text-align: left;
+            position: absolute;
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+
+<h1> POST Archive until {% now "N일 d, Y" %} </h1>
+
+<ul>
+    {% for date in date_list %}
+    <li style="display: inline;">
+        | <a href="{% url 'blog:post_year_archive' date|date:'Y' %}">Year - {{ date|date:"Y" }}</a>
+    </li>
+    {% endfor %}
+    |
+</ul>
+
+<br/>
+
+<div class="main">
+    <ul>
+    {% for post in object_list %}
+        <li>
+            {{ post.modify_date|date:"Y-m-d" }}&nbsp;&nbsp;&nbsp;
+            <a href="{{ post.get_absolute_url }}" target="_blank"><strong>{{ post.title }}</strong></a>
+            <span>상태 : {{ post.status }}</span>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+
+</body>
+</html>

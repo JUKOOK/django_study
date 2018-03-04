@@ -19,8 +19,10 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^blog/', include('blog.urls')),
+
+    # 이곳의 namespace는 2계층 url 구조에 대해 namespace A:B 의 A가 된다.
+    url(r'^blog/', include('blog.urls', namespace='blog')),
     url(r'^apisample/', include('restAPI.urls', namespace='restAPI')),
-    url(r'^community/', include('community.urls')),
-    url(r'^bookmark/', include('bookmark.urls')),
+    url(r'^community/', include('community.urls', namespace='community')),
+    url(r'^bookmark/', include('bookmark.urls', namespace='bookmark')),
 ]
