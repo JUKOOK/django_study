@@ -42,7 +42,15 @@ INSTALLED_APPS = [
     'restAPI',
     'community',
     'bookmark.apps.BookmarkConfig',
+    'tagging.apps.TaggingConfig',  # django-tagging의 application 이름
+    'disqus',  # django-disqus의 application 이름
+    'django.contrib.sites',  # django-disqus 사용을 위해 추가
+    'photo.apps.PhotoConfig',
 ]
+
+DISQUS_WEBSITE_SHORTNAME = 'djangostudy-5'  # disqus 연결된 site shortname
+SITE_ID = 1
+
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -59,7 +67,7 @@ ROOT_URLCONF = 'django_study.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # django_study/templates 디렉토리 path 정의
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,3 +131,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # django_study/static 디렉토리 path 정의
+
+# 사진 업로드 기능을 위한 등록 : 사진, 영상들은 media 디렉토리에 모은다!!
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

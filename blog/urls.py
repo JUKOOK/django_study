@@ -27,4 +27,14 @@ urlpatterns = [
 
     # /today/ 금일 보관소
     url(r'^today/$', PostTAV.as_view(), name="post_today_archive"),
+
+    # /tag/ 태그 클라우드를 보여준다.
+    url(r'^tag/$', TagTC.as_view(), name="tag_cloud"),
+
+    # /tag/tagname tagname에 해당하는 포스트들 보여준다.
+    # 정규표현식: Name은 tag, / 이외의 문자가 한 번 이상 반복, unicode로 인식한다.(한글 포함 가능)
+    url(r'^tag/(?P<tag>[^/]+(?u))/$', PostTOL.as_view(), name="tagged_object_list"),
+
+    # /search/ 검색 기능
+    url(r'^search/$', SearchFormView.as_view(), name="search"),
 ]

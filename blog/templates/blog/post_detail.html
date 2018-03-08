@@ -1,24 +1,26 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title> POST : DETAIL</title>
-    <style>
-        .body {
-            width: 70%;
-        }
+{% extends 'base.html' %}
 
-        h1 {
+{% load staticfiles %}
+
+{% block title%} POST : DETAIL {% endblock title %}
+
+{% block inlinestyle %}
+    <style>
+        #content h1 {
             color: #c81414;
         }
-        button a {
+
+        #content button a {
             text-decoration: none;
         }
 
+        #content .tagArea {
+            margin: 10px 3px;
+        }
     </style>
-</head>
-<body>
+{% endblock inlinestyle %}
 
+{% block content %}
 <h1> {{ object.title }} </h1>
 
 <p class="other_post">
@@ -37,7 +39,7 @@
 
 <h5 class="date"> {{ object.author}} || {{ object.modify_date|date:"F j일, Y" }} </h5>
 
-<br/><br/>
+<br/>
 
 <div class="body">
     <p><b>{{ object.content|linebreaks }}</b></p>
@@ -48,5 +50,21 @@
 <button><a href="{% url 'blog:post_year_archive' object.modify_date|date:'Y' %}"> 포스트와 동일한 연도 글 목록 </a></button>
 <button><a href="{% url 'blog:post_month_archive' object.modify_date|date:'Y' %}"> 포스트와 동일한 월 글 목록  </a></button>
 <button><a href="{% url 'blog:post_day_archive' object.modify_date|date:'Y' object.modify_date|date:'d' %}"> 포스트와 동일한 월일 글 목록  </a></button>
-</body>
-</html>
+
+<div class="tagArea">
+    <b>TAGS : </b>
+    {% load tagging_tags %}   <!-- tagging 라이브러리에 정의된 커스텀 태그를 사용하기 위함-->
+    {% tags_for_object object as tags %} <!-- 이 object에 달려있는 tag들의 리스트를 tags 로 추출 -->
+    {% for tag in tags %}
+    <a href="{% url 'blog:tagged_object_list' tag.name %}">{{ tag.name }}</a>
+    {% endfor %}
+    <a href="{% url 'blog:tag_cloud' %}"><b style="font-weight: bolder; color: darkblue">[ Tag Cloud ]</b></a>
+</div>
+
+<br/><br/><br/>
+<div class="disqus">
+    {% load disqus_tags %} <!-- disqus 앱에 정의된 커스텀 태그를 사용하기 위해 -->
+    {% disqus_show_comments %} <!-- disqus 커스텀 태그 : 댓글 및 댓글 입력 폼 댓글 영역 Default 출력 -->
+</div>
+
+{% endblock content %}

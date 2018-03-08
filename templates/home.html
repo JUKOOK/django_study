@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block title %} Home {% endblock title %}
+
+{% block extrastyle %}{% static 'home/css/home.css'%}{% endblock extrastyle %}
+
+{% block content %}
+    <div id="content_home">
+        <div id="homeimg">
+            <a href="#"><img src="{% static 'img/django-actor-big.jpg' %}" alt="장고 액터 사진"></a>
+            <h4>This is Django powered web site.</h4>
+        </div>
+
+        <hr style="margin: 5px 0;">
+
+        <h2>Select Application</h2>
+
+        <table id="applist">
+            <tr>
+                <td><b><i><a href="{% url 'bookmark:index' %}">BOOKMARK</a></i></b></td>
+                <td>즐겨찾기를 작성하고 다른 이들과 공유할 수 있다. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</td>
+                <td class="Edit"><i><a href="">Add</a></i></td>
+                <td class="Edit"><i><a href="">Change</a></i></td>
+            </tr>
+
+            <tr>
+                <td><b><i><a href="{% url 'blog:index' %}">BLOG</a></i></b></td>
+                <td>뉴스기사를 블로그처럼 게시물로 포스팅하고 다른 이들과 공유할 수 있다. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</td>
+                <td class="Edit"><i><a href="">Add</a></i></td>
+                <td class="Edit"><i><a href="">Change</a></i></td>
+            </tr>
+
+            <tr>
+                <td><b><i><a href="#">PHOTO</a></i></b></td>
+                <td>사진을 업로드 하고 다른 이들과 공유할 수 있다.Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</td>
+                <td class="Edit"><i><a href="">Add</a></i></td>
+                <td class="Edit"><i><a href="">Change</a></i></td>
+            </tr>
+        </table>
+    </div>
+{% endblock content %}

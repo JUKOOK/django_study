@@ -1,0 +1,38 @@
+.tag_box {
+    width: 40%;
+    height: 50%;
+    margin: 20px auto;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid orange;
+    background-color: #ffc;
+    position: relative;
+}
+
+.tag_cloud {
+    width: 70%;
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform: translate(-50%, -50%);
+}
+
+.tag-1 { font-size: 13px; }
+
+.tag-2 { font-size: 15px;}
+
+.tag-3 { font-size: 18px;}
+
+.tag-4 { font-size: 22px; }
+
+.tag-5 { font-size: 28px; }
+
+.tag-6 { font-size: 35px;  }
+
+.tag-7 { font-size: 40px; }
+
+.tag-8 { font-size: 47px; }
+
+.tag-9 { font-size: 55px; }
+
+

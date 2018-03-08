@@ -6,9 +6,9 @@ from .models import Post
 # Register your models here.
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('id', 'status', 'title', 'slug', 'tags', 'description', 'create_date', 'modify_date')
+    list_display = ('id', 'status', 'title', 'slug', 'tag', 'description', 'create_date', 'modify_date')
     list_filter = ('modify_date',)  # modify_date를 필터로 하는 사이드바를 보여준다.
-    search_fields = ('title', 'content',)  # 검색박스를 띄우고 검색 쿼리는 title, content 에거 검색하게 한다.
+    search_fields = ('title', 'content',)  # 검색박스를 띄우고 검색 쿼리는 title, content 에서 검색하게 한다.
     prepopulated_fields = {'slug': ('title',)}  # slug 필드는 title 필드를 이용해 미리 채워진다.(소문자, 숫자, -_ 자동 복사)
 
     # 포스트 변경에서 action 목록에 함수 이름으로 기능을 추가한다.
@@ -37,4 +37,4 @@ class PostAdmin(admin.ModelAdmin):
     make_withdrawn.short_description = '지정 포스팅을 Withdrawn 상태로 변경'
 
 
-admin.site.register(Post, PostAdmin)  # Post와 PostAdmin을 admin 페이지에 등로한다.
+admin.site.register(Post, PostAdmin)  # Post와 PostAdmin을 admin 페이지에 등록한다.

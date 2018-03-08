@@ -1,8 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title> POST : Archive_year</title>
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title%} POST : Archive_year {% endblock title %}
+
+{% block inlinestyle %}
     <style>
         .main ul li {
             width: 40%;
@@ -15,9 +17,9 @@
             right: 0;
         }
     </style>
-</head>
-<body>
+{% endblock inlinestyle %}
 
+{% block content %}
 <h1> POST Archive for {{ year|date:"Y" }} </h1> <!-- 현재 연도에 대한 datetime.date 타입 객체-->
 
 <ul>
@@ -36,12 +38,10 @@
     {% for post in object_list %}
         <li>
             {{ post.modify_date|date:"Y-m-d" }}&nbsp;&nbsp;&nbsp;
-            <a href="{{ post.get_absolute_url }}" target="_blank"><strong>{{ post.title }}</strong></a>
+            <a href="{{ post.get_absolute_url }}"><strong>{{ post.title }}</strong></a>
             <span>상태 : {{ post.status }}</span>
         </li>
     {% endfor %}
     </ul>
 </div>
-
-</body>
-</html>
+{% endblock content %}

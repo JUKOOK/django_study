@@ -3,9 +3,11 @@ from django.db import models
 import re     # Regular Expression
 from django.forms import ValidationError
 from django.core.urlresolvers import reverse
+from tagging.fields import TagField
+
 
 def lnglat_validator(value):
-    if not re.match(r'^([+-]?\d+\.?\d*), ([+-]?\d+\.?\d*)$', value): # +- 있어도 되고 없어도 됨, n.n, n.n 형식
+    if not re.match(r'^([+-]?\d+\.?\d*), ([+-]?\d+\.?\d*)$', value):  # +- 있어도 되고 없어도 됨, n.n, n.n 형식
         raise ValidationError('LngLat 타입이 바르지 않습니다.')
 
 
@@ -34,11 +36,11 @@ class Post(models.Model):
     slug = models.SlugField('Slug', max_length=50, help_text='포스트 제목의 별칭입니다. 한 단어만!', unique=True)
     content = models.TextField('내용', help_text='포스트 내용')   # 길이제안 없는 문자열
     description = models.CharField('한 줄 요약', max_length=100, help_text='포스트 내용 한 줄 설명', blank=True)
-    tags = models.CharField(max_length=100, blank=True)       # 비워도 괜찮음.
     create_date = models.DateTimeField('Create Date', auto_now_add=True)    # 최초 저장이 되는 일시 자동저장
     modify_date = models.DateTimeField('Modify Date', auto_now=True, editable=True)        # 저장될 때마다 일시 자동저장
 
     # 추가 field :
+    tag = TagField()  # tagging을 import함으로써...
     status = models.CharField('상태', max_length=1, choices=STATUS_CHOICES)
     lnglat = models.CharField(max_length=40, blank=True, validators=[lnglat_validator], help_text='경도, 위도 포맷으로 입력 바람')
     # Validator 함수 사용
@@ -46,7 +48,7 @@ class Post(models.Model):
     class Meta:
         verbose_name = 'post'  # 테이블 단수 별칭
         verbose_name_plural = 'posts'  # 테이블 복수 별칭
-        db_table = 'my_post'  # DB에 저장되는 테이블 이름 default는 blog_post
+        db_table = 'my_post'  # DB에 저장되는 테이블 이름 default는 blog_post <앱 이름>_<model 이름>
         ordering = ('-modify_date',)  # 모델 객체 리스트 출력시 modify_date 기준 내림차순
 
     def __str__(self):  # 객체의 문자열 표시

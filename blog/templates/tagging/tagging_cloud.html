@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title%} BLOG : Tagging Cloud {% endblock title %}
+
+{% block extrastyle %}{% static 'tagging/tag.css' %}{% endblock extrastyle %}
+
+{% block content %}
+
+<h1>Blog Tag Cloud</h1>
+
+<div class="tag_box">
+    {% load tagging_tags %}  <!-- tagging 라이브러리에 정의된 커스텀 태그를 사용하기 위함-->
+    {% tag_cloud_for_model blog.Post as tags with steps=8 min_count=2 distribution=log %}
+    <!--
+    blog.Post : 태그를 추출하는 대상은 blog 앱의 Post
+    as tags : 추출된 태그 리스트의 이름은 tags
+    with steps=6 min_count=1 : 택 폰트 크기 범위를 1~6, 출력용 최소 사용 횟수를 1로 지정
+    distribution = log : 태그 폰트 크기 할당할 때 수학의 '로그' 스케일을 활용
+    -->
+    <div class="tag_cloud">
+        {% for tag in tags %}
+        <span class="tag-{{tag.font_size}}">
+            <a href="{% url 'blog:tagged_object_list' tag.name %}">{{ tag.name }}</a>
+        </span>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}

@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from .views import HomeView
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', HomeView.as_view(), name='home'),  # 첫 페이지 view
 
     # 이곳의 namespace는 2계층 url 구조에 대해 namespace A:B 의 A가 된다.
     url(r'^blog/', include('blog.urls', namespace='blog')),

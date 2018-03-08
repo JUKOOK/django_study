@@ -1,0 +1,102 @@
+body {
+    font-family: "Lucida Grande", Verdana, Arial;
+    font-size: 14px;
+}
+
+a:link, a:visited {
+    color: #369;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+td, th {
+    line-height: 18px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+    padding: 5px 15px;
+    font-family: "Lucida Grande", Verdana, Arial;
+}
+
+nav#header {
+    height: 40px;
+}
+
+div#menu {
+    height: 30px;
+    width: 100%;
+    background-color: #ffa;
+    font-size: 10px;
+    position: absolute;
+    top: 40px;
+}
+
+div#menu .row {
+    height: 100%;
+    justify-content: space-evenly;
+}
+
+
+div#content {
+    max-width: none;
+    width: auto;
+    position: absolute;
+    top: 90px;
+    left: 50px;
+    right: 50px;
+    bottom: 120px;
+    margin: 0 auto;
+    overflow-y: scroll;
+}
+
+footer#footer {
+    max-width: none;
+    width: auto;
+    position: absolute;
+    bottom: 70px;
+    left: 50px;
+    right: 50px;
+    height: 30px;
+    border-top: 1px solid #ccc;
+    margin: 0 auto;
+}
+
+.main_title {
+    color: #ffc;
+    font-size: 12px;
+    line-height: 12px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.welcome a:link, .welcome a:visited {
+    color: white;
+}
+
+div#menu div > li {
+    display: table-cell;
+    border: 2px solid palegreen;
+    font-weight: bold;
+    width: 5%;
+    border-radius: 25px;
+    line-height: 25px;
+}
+
+div#menu div > li ul {
+    display: none;
+    position: absolute;
+    top: 30px;
+    padding: 10px 10px 5px 10px;
+    list-style: none;
+    border: 1px solid #ccc;
+    border-top: none;
+    background: #fff;
+    z-index: 1;
+}
+
+div#menu div > li:hover ul {
+    display: block;
+}
+

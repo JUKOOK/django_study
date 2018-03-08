@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title%} BLOG : Tagging Post List {% endblock title %}
+
+{% block inlinestyle %}
+    <style>
+        #content h3 {
+            display: inline;
+        }
+    </style>
+{% endblock inlinestyle %}
+
+{% block content %}
+<h1>Posts for tag - <span style="color:hotpink;">{{ tag.name }}</span></h1>
+
+{% for post in object_list %}
+    <h3><a href="{{ post.get_absolute_url }}"> {{ post.title }}</a></h3>
+    <small> {{ post.modify_date|date:"N d, Y" }}</small> <!-- 포맷 기능 -->
+    <p> {{ post.description }} : 연결 url slug -> <b>{{ post.slug }}</b></p>
+{% endfor %}
+
+{% endblock content %}
