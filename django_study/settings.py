@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles',  # 여기까지 최초 migrate 때 전부 테이블 생성, DB 연결 완료
     'rest_framework',
     'blog.apps.BlogConfig',
     'restAPI',
@@ -82,6 +82,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'django_study.wsgi.application'
 
+
+# Login, Logout 과련 세팅
+# LOGIN_URL = '/accounts/login/'  # 로그인 페이지 url, default 동일하다.
+# LOGOUT_URL = '/accounts/logout/'  # 로그아웃 페이지 url, default 동일하다.
+LOGIN_REDIRECT_URL = '/'  # 로그인 처리 성공시 next 첫 페이지 지정 -> '/^&/' home으로 간다.
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases

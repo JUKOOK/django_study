@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title%} Blog : Add and Update {% endblock title %}
+
+{% block extrastyle %}{% static 'forms.css' %}{% endblock extrastyle %}
+
+{% block content %}
+    <h2 class="not_admin"> Blog Create/Update - {{ user }}</h2>
+    <form action="." method="post">
+        {% csrf_token %}
+        {% if form.errors %}
+            <p class="errornote"> 삐빅! 아래의 오류를 수정해주세요.</p>
+        {% endif %}
+
+        <p>블로그의 게시물 포스팅을 하거나, 당신의 북마크를 수정할 수 있습니다..</p>
+
+        <fieldset class="aligned"> <!-- 비슷한 form 요소를 묶는다 / form 변수는 class-based view에서 넘겨주는 context이다. -->
+            <div class="form_row">
+                {{ form.title.label_tag }} {{ form.title }} <!-- title form 출력 요소 -->
+            </div>
+            <div class="form_row">
+                {{ form.slug.label_tag }} {{ form.slug }} <!-- slug form 출력 요소 -->
+            </div>
+            <div class="form_row">
+                {{ form.description.label_tag }} {{ form.description }} <!-- description form 출력 요소 -->
+            </div>
+            <div class="form_row">
+                {{ form.content.label_tag }} {{ form.content }} <!-- content form 출력 요소 -->
+            </div>
+            <div class="form_row">
+                {{ form.tag.label_tag }} {{ form.tag }} <!-- tag form 출력 요소 -->
+            </div>
+            <div class="form_row">
+                {{ form.status.label_tag }} {{ form.status }} <!-- status form 출력 요소 -->
+            </div>
+        </fieldset>
+
+        <div class="submit_row">
+            <input type="submit" value="Submit"/>
+        </div>
+
+        <script type="text/javascript">
+            document.getElementById('id_title').focus(); <!-- title 입력 요소에 커서를 위치시킨다. -->
+        </script>
+    </form>
+{% endblock content %}

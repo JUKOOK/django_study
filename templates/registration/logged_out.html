@@ -1,0 +1,16 @@
+<!-- auth.views.logout() 뷰에서 지정된 로그아웃 이후 화면 -->
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title%} ACCOUNT : Logout Success {% endblock title %}
+
+{% block content %}
+
+<h2> Logged Out </h2>
+
+<p> 사이트를 이용해 주셔서 감사합니다. </p>
+
+<p><a href="{% url 'login' %}">로그인 하러 가기</a></p>
+
+{% endblock content %}

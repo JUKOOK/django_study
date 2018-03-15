@@ -12,6 +12,11 @@ from .forms import PostSearchForm
 from django.db.models import Q
 from django.shortcuts import render  # <-- 함수형 view일 경우 사용
 
+# 사이트 내부에서 레코드 생성, 수정, 삭제를 위한 제네릭 views
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.core.urlresolvers import reverse_lazy
+from django_study.views import LoginRequiredMixin
+
 # views.generic 기반한 class-based view 정의
 # 클래스형 제네릭 뷰 : 장고가 잡아주는 2가지 속성
 
@@ -90,7 +95,7 @@ class PostTOL(TaggedObjectList):
 # search를 위한 FormView 제네릭 뷰 상속한 class-based view
 # FormView : GET 요청인 경우 폼을 화면에 띄우고 사용자의 입력을 기다리며, 제출된 데이터는 POST 요청으로
 # 접수되어 유효성 검사를 한다.(form_valid) 유효한 post가 있으면 render한다.
-class SearchFormView(FormView):
+class SearchFormView(LoginRequiredMixin, FormView):
     form_class = PostSearchForm  # 연동 폼 지정
     template_name = 'blog/post_search.html'  # 띄울 템플릿 이름
 
@@ -111,3 +116,38 @@ class SearchFormView(FormView):
         context['object_list'] = post_list
 
         return render(self.request, self.template_name, context)  # No redirection
+
+
+# 사이트 내에 블로그 레코드에 대해 create, update, delete 기능을 집어넣기 위한 class-based view
+class PostCreateView(LoginRequiredMixin, CreateView):
+    model = Post
+    fields = ['title', 'slug', 'description', 'content', 'tag']
+    initial = {'slug': 'auto-filling-do-not-input'}
+    # 폼의 slug는 title 필드로부터 자동적으로 채워딘다(Post 모델의 save 함수에서!), 그래서 초기 문구를 넣었다.
+    success_url = reverse_lazy('blog:index')
+    # template_name = : default 로 <모델명소문자>_form.html
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user  # 폼의 owner 필드에 현재 로그인된 사용자의 User객체를 할당한다.
+        return super(PostCreateView, self).form_valid(form)
+
+
+class PostChangeListView(LoginRequiredMixin, ListView):
+    template_name = 'blog/post_change_list.html'
+    # template_name = : default 없음 따로 지정해야 함.
+
+    def get_queryset(self):  # 블로그 레코드 중 지금 로그인한 사용자가 만든 객체들만 리스트해서 보여준다.
+        return Post.objects.filter(owner=self.request.user)
+
+
+class PostUpdateView(LoginRequiredMixin, UpdateView):
+    model = Post
+    fields = ['title', 'slug', 'description', 'content', 'tag']
+    success_url = reverse_lazy('blog:index')
+    # template_name = : default 로 <모델명소문자>_form.html
+
+
+class PostDeleteView(LoginRequiredMixin, DeleteView):
+    model = Post
+    success_url = reverse_lazy('blog:index')
+    # template_name = : default 로 <모델명소문자>_confirm_delete.html

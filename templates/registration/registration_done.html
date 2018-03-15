@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title%} ACCOUNT : Registration Done {% endblock title %}
+
+{% block content %}
+
+<h2> User Regstration : Complete </h2>
+
+<p> Thank you! </p>
+
+<p><a href="{% url 'login' %}">로그인 하러 가기</a></p>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title%} PHOTO : Photo Detail {% endblock title %}
+
+{% block extrastyle %}{% static 'photo/css/photo.css' %}{% endblock extrastyle %}
+
+
+{% block content %}
+
+    <h2 style="display:inline">{{ object.title }}</h2>
+
+    <table class="photo_detail">
+        <tr>
+            <td>
+                <a href="{{ object.image_url }}">
+                    <img src="{{ object.image.url }}" alt="" />
+                </a>
+            </td>
+            <td>
+                <ul>
+                    <li>Photo Description</li>
+                    {% if object.description %}
+                    <p>{{ object.description|linebreaks }}</p>
+                    {% else %}
+                    <br/><p>( blank )</p>
+                    {% endif %}
+                    <li>Photo Upload Date</li>
+                    <br/><p>{{ object.upload_date|date:"Y-m-d" }}</p>
+                    <li>Album Category</li>
+                    <br/><p><a href="{% url 'photo:album_detail' object.album.id %} ">{{ object.album.name }}</a></p>
+                </ul>
+            </td>
+        </tr>
+    </table>
+
+{% endblock content %}

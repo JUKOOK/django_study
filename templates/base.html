@@ -28,16 +28,31 @@
       <div class="container">
         <h2 class="main_title">Easy&Fast Django Study</h2>
         <div class="welcome">
+          <h4 style="display: inline;">Welcome!</h4>
           <ul class="navbar-nav">
+            {% if user.is_active %}
             <li class="nav-item">
-              <a class="nav-link" href="#">JUKOOK</a>
+                <strong>&nbsp;{% firstof user.get_short_name user.get_username %}</strong>
+            </li>
+            &nbsp;&nbsp;
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'password_change' %}">Change Password</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Change Password</a>
+              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <strong>, Anonymous</strong>
+            </li>
+            &nbsp;&nbsp;
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Logout</a>
+              <a class="nav-link" href="{% url 'register' %}">Register</a>
             </li>
+            {% endif %}
           </ul>
         </div>
       </div>
@@ -48,18 +63,18 @@
             <li><a href="{% url 'home' %}">Home</a></li>
             <li><a href="{% url 'bookmark:index' %}">Bookmark</a></li>
             <li><a href="{% url 'blog:index' %}">Blog</a></li>
-            <li><a href="#">Photo</a></li>
+            <li><a href="{% url 'photo:index' %}">Photo</a></li>
             <li><a href="#">Add&bigtriangledown;</a>
                 <ul>
-                    <li><a href="#">Bookmark</a></li>
-                    <li><a href="#">Blog</a></li>
+                    <li><a href="{% url 'bookmark:add_bookmark' %}">Bookmark</a></li>
+                    <li><a href="{% url 'blog:add_blog' %}">Blog</a></li>
                     <li><a href="#">Photo</a></li>
                 </ul>
             </li>
             <li><a href="#">Change&bigtriangledown;</a>
                 <ul>
-                    <li><a href="#">Bookmark</a></li>
-                    <li><a href="#">Blog</a></li>
+                    <li><a href="{% url 'bookmark:changeable_bookmark' %}">Bookmark</a></li>
+                    <li><a href="{% url 'blog:changeable_blog' %}">Blog</a></li>
                     <li><a href="#">Photo</a></li>
                 </ul>
             </li>

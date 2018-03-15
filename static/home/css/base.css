@@ -20,8 +20,33 @@ td, th {
     font-family: "Lucida Grande", Verdana, Arial;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Lucida Grande", Verdana, Arial;
+}
+
+hr {
+    margin: 5px 0;
+}
+
 nav#header {
     height: 40px;
+}
+
+nav#header .welcome {
+    display: flex;
+}
+
+nav#header .welcome h4,
+nav#header .welcome strong {
+    color: white;
+}
+
+nav#header .welcome h4 {
+    line-height: 32px
+}
+
+nav#header .welcome strong {
+    line-height: 37px
 }
 
 div#menu {
@@ -100,3 +125,18 @@ div#menu div > li:hover ul {
     display: block;
 }
 
+.not_admin {
+    text-align: center;
+    margin: 3% auto;
+}
+
+/* bookmark_change_list.html과 post_change_list.html에서 사용한 table의 class */
+table.changeable_list {
+    border-collapse: collapse;
+}
+
+table.changeable_list,
+table.changeable_list th,
+table.changeable_list td {
+    border: 1px solid #eee;
+}

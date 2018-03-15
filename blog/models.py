@@ -4,6 +4,8 @@ import re     # Regular Expression
 from django.forms import ValidationError
 from django.core.urlresolvers import reverse
 from tagging.fields import TagField
+from django.contrib.auth.models import User  # User의 포스트의 소유자를 고려, 확인하기 위함 / ForeignKey로써!
+from django.utils.text import slugify  # slug 필드 자동 채우기
 
 
 def lnglat_validator(value):
@@ -38,9 +40,10 @@ class Post(models.Model):
     description = models.CharField('한 줄 요약', max_length=100, help_text='포스트 내용 한 줄 설명', blank=True)
     create_date = models.DateTimeField('Create Date', auto_now_add=True)    # 최초 저장이 되는 일시 자동저장
     modify_date = models.DateTimeField('Modify Date', auto_now=True, editable=True)        # 저장될 때마다 일시 자동저장
+    owner = models.ForeignKey(User, null=True)
 
     # 추가 field :
-    tag = TagField()  # tagging을 import함으로써...
+    tag = TagField()  # tagging을 import함으로써 사용하는 커스텀 필드
     status = models.CharField('상태', max_length=1, choices=STATUS_CHOICES)
     lnglat = models.CharField(max_length=40, blank=True, validators=[lnglat_validator], help_text='경도, 위도 포맷으로 입력 바람')
     # Validator 함수 사용
@@ -64,3 +67,8 @@ class Post(models.Model):
     # get_next_by_modify_date 라는 장고 내장함수 이용, modify_date 기준으로 다음 post 객체 반환한다.
     def get_next_post(self):
         return self.get_next_by_modify_date()
+
+    def save(self, *args, **kwargs):
+        if not self.id:  # self.id 를 확인해 False인 경우 : 처음으로 저장하는 경우에 slug 필드를 title 필드의 단어로 자동 변환해 채운다.
+            self.slug = slugify(self.title, allow_unicode=True)
+        super(Post, self).save(*args, **kwargs)

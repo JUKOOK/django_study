@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title%} Blog : Changeable list {% endblock title %}
+
+{% block content %}
+    <h2 class="not_admin"> Blog Changeable list - {{ user }}</h2>
+
+    <table class="changeable_list">
+        <tr>
+            <th>Title - <span style="font-size: 10px">author</span></th>
+            <th>slug</th>
+            <th>description</th>
+            <th>Owner</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        {% for item in object_list %}
+        <tr>
+            <td>{{ item.title }} - <span style="font-size: 10px">{{ item.author }}</span></td>
+            <td>{{ item.slug }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.owner }}</td>
+            <td><a href="{% url 'blog:update_blog' item.id %}">Update</a></td>
+            <td><a href="{% url 'blog:delete_blog' item.id %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock content %}

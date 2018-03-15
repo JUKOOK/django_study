@@ -37,4 +37,14 @@ urlpatterns = [
 
     # /search/ 검색 기능
     url(r'^search/$', SearchFormView.as_view(), name="search"),
+
+    # 블로그 포스트 추가, 변경 대상 리스트, 수정, 삭제
+    # /add/
+    url(r'^add/$', PostCreateView.as_view(), name="add_blog"),
+    # /change
+    url(r'^change/$', PostChangeListView.as_view(), name="changeable_blog"),
+    # /99/update
+    url(r'^(?P<pk>[0-9]+)/update/$', PostUpdateView.as_view(), name="update_blog"),
+    # /00/delete/
+    url(r'^(?P<pk>[0-9]+)/delete/$', PostDeleteView.as_view(), name="delete_blog"),
 ]

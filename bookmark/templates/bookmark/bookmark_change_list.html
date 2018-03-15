@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title%} BookMark : Changeable list {% endblock title %}
+
+{% block content %}
+    <h2 class="not_admin"> Bookmark Changeable list - {{ user }}</h2>
+
+    <table class="changeable_list">
+        <tr>
+            <th>Title</th>
+            <th>Url</th>
+            <th>Owner</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        {% for item in object_list %}
+        <tr>
+            <td>{{ item.title }}</td>
+            <td>{{ item.url }}</td>
+            <td>{{ item.owner }}</td>
+            <td><a href="{% url 'bookmark:update_bookmark' item.id %}">Update</a></td>
+            <td><a href="{% url 'bookmark:delete_bookmark' item.id %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock content %}

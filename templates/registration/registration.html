@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title%} ACCOUNT : Registration {% endblock title %}
+
+{% block extrastyle %}{% static 'forms.css' %}{% endblock extrastyle %}
+
+{% block content %}
+
+<h2>New User Regstration : Sign Up!</h2>
+
+<form class="registration" action="." method="post">
+    {% csrf_token %}
+    {% if form.errors %}
+    <p class="errornote">입력이 잘못되었습니다. 아래 표시된 오류를 수정하세요.</p>
+    {% endif %}
+    
+    <p>아이디와 비밀번호, 성함을 입력하십시오.</p>
+    
+    <fieldset class="aligned"> <!-- 비슷한 form 요소를 묶는다 / form 변수는 login view에서 넘겨주는 context이다. -->
+        <div class="form_row">
+            {{ form.username.label_tag }} {{ form.username }} <!-- id(username) form 출력 요소 -->
+        </div>
+        <div class="form_row">
+            {{ form.password1.label_tag }} {{ form.password1 }} <!-- password1 form 출력 요소, 비번1 -->
+        </div>
+        <div class="form_row">
+            {{ form.password2.label_tag }} {{ form.password2 }} <!-- password2 form 출력 요소, 비번2 -->
+        </div>
+    </fieldset>
+    
+    <div class="submit_row">
+        <input type="submit" value="Register"/> <!-- value가 Register이면 계정 생성으로 인식한다. -->
+    </div>
+    
+    <script type="text/javascript">
+        document.getElementById('id_username').focus(); <!-- Username 입력 요소에 커서를 위치시킨다. -->
+    </script>
+</form>
+
+{% endblock %}
